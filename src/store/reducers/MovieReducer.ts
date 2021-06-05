@@ -3,7 +3,24 @@ import { MovieAction, MovieState } from "../types";
 const initialState: MovieState = {
 	id: null,
 	details: null,
-	credits: null,
+	credits: {
+		cast: [
+			{
+				character: null,
+				id: null,
+				name: null,
+				profile_path: null,
+			},
+		],
+		crew: [
+			{
+				department: null,
+				id: null,
+				name: null,
+				profile_path: null,
+			},
+		],
+	},
 	loading: false,
 	error: null,
 };
@@ -14,7 +31,24 @@ const MovieReducer = (state = initialState, action: MovieAction) => {
 			return {
 				id: action.payload,
 				details: null,
-				credits: null,
+				credits: {
+					cast: [
+						{
+							character: null,
+							id: null,
+							name: null,
+							profile_path: null,
+						},
+					],
+					crew: [
+						{
+							department: null,
+							id: null,
+							name: null,
+							profile_path: null,
+						},
+					],
+				},
 				loading: false,
 				error: null,
 			};

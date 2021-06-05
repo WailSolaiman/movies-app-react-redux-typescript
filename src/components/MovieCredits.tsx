@@ -1,7 +1,6 @@
 import React, { FC, ReactElement, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Col, Row } from "react-bootstrap";
-import Skeleton from "react-loading-skeleton";
 
 import { getMovieCredits } from "../store/actions/ActionCreator";
 import { RootState } from "../store";
@@ -18,25 +17,20 @@ const MovieStars: FC<MovieStarsProps> = ({ stars }): ReactElement => {
 
 	return (
 		<React.Fragment>
-			{stars.slice(0, 12).map((star, index) => (
-				<Col xs={6} md={2} key={index}>
-					<Card className="mb-3">
-						<Card.Img
-							variant="top"
-							src={`https://image.tmdb.org/t/p/w500/${star.profile_path}`}
-							onError={handleImageError}
-						/>
-						<Card.Body>
-							<Card.Title>
-								{star.name || <Skeleton duration={2} delay={1} />}
-							</Card.Title>
-							<Card.Text>
-								{star.character || <Skeleton duration={2} delay={1} />}
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				</Col>
-			))}
+			{stars.slice(0, 12).map((star, index) => {
+				const url = `https://image.tmdb.org/t/p/w500/${star.profile_path}`;
+				return (
+					<Col xs={6} md={2} key={index}>
+						<Card className="mb-3">
+							<Card.Img variant="top" src={url} onError={handleImageError} />
+							<Card.Body>
+								<Card.Title>{star.name}</Card.Title>
+								<Card.Text>{star.character}</Card.Text>
+							</Card.Body>
+						</Card>
+					</Col>
+				);
+			})}
 		</React.Fragment>
 	);
 };

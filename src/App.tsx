@@ -40,7 +40,9 @@ function App() {
 				{loading ? (
 					<div className="container">
 						<div className="text-center">
-							<p className="mt-5">Loading...</p>
+							<div className="spinner-border text-light mt-5" role="status">
+								<span className="sr-only">Loading...</span>
+							</div>
 						</div>
 					</div>
 				) : (

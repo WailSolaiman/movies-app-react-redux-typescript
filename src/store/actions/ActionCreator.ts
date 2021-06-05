@@ -21,49 +21,47 @@ import { RootState } from "../";
 export const getMovieId = (
 	movieQuery: string
 ): ThunkAction<void, RootState, null, MovieAction | AlertAction> => {
-	return async (dispatch) => {
+	return (dispatch) => {
 		try {
-			const response = await fetch(
-				`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${movieQuery}`
-			);
+			setTimeout(async () => {
+				const response = await fetch(
+					`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${movieQuery}`
+				);
 
-			if (!response.ok) {
-				const responseData: MovieError = await response.json();
-				dispatch({
-					type: SET_ERROR,
-					payload: {
-						message: responseData.message,
-					},
-				});
-			}
+				if (!response.ok) {
+					const responseData: MovieError = await response.json();
+					dispatch({
+						type: SET_ERROR,
+						payload: {
+							message: responseData.message,
+						},
+					});
+				}
 
-			const movie: MovieResults = await response.json();
-			const movieId: number = movie.results[0]?.id;
-			if (movieId) {
-				dispatch({
-					type: SET_ALERT,
-					payload: "",
-				});
-				dispatch({
-					type: GET_MOVIE_ID,
-					payload: movieId,
-				});
-			} else {
-				// dispatch({
-				// 	type: SET_ALERT,
-				// 	payload: "Movie not found.",
-				// });
-				dispatch({
-					type: SET_ALERT,
-					payload: "",
-				});
-				dispatch({
-					type: SET_ERROR,
-					payload: {
-						message: "Movie file not found!",
-					},
-				});
-			}
+				const movie: MovieResults = await response.json();
+				const movieId: number = movie.results[0]?.id;
+				if (movieId) {
+					dispatch({
+						type: SET_ALERT,
+						payload: "",
+					});
+					dispatch({
+						type: GET_MOVIE_ID,
+						payload: movieId,
+					});
+				} else {
+					dispatch({
+						type: SET_ALERT,
+						payload: "",
+					});
+					dispatch({
+						type: SET_ERROR,
+						payload: {
+							message: "Movie not found, please try again!",
+						},
+					});
+				}
+			}, 3000);
 		} catch (error) {
 			console.error("ERROR: " + error);
 		}

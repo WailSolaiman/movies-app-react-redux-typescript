@@ -65,17 +65,17 @@ export interface MovieDetails {
 }
 
 export interface MovieCast {
-	id: number;
-	name: string;
-	profile_path: string;
-	character: string;
+	id: number | null;
+	name: string | null;
+	profile_path: string | null;
+	character: string | null;
 }
 
 export interface MovieCrew {
-	id: number;
-	name: string;
-	profile_path: string;
-	department: string;
+	id: number | null;
+	name: string | null;
+	profile_path: string | null;
+	department: string | null;
 }
 
 export interface MovieCredits {

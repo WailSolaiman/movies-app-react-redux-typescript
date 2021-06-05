@@ -1,6 +1,7 @@
 import React, { FC, ReactElement, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Col, Row } from "react-bootstrap";
+import Skeleton from "react-loading-skeleton";
 
 import { getMovieCredits } from "../store/actions/ActionCreator";
 import { RootState } from "../store";
@@ -26,8 +27,12 @@ const MovieStars: FC<MovieStarsProps> = ({ stars }): ReactElement => {
 							onError={handleImageError}
 						/>
 						<Card.Body>
-							<Card.Title>{star.name}</Card.Title>
-							<Card.Text>{star.character}</Card.Text>
+							<Card.Title>
+								{star.name || <Skeleton duration={2} delay={1} />}
+							</Card.Title>
+							<Card.Text>
+								{star.character || <Skeleton duration={2} delay={1} />}
+							</Card.Text>
 						</Card.Body>
 					</Card>
 				</Col>

@@ -53,6 +53,7 @@ const Search: FC<SearchProps> = ({
 								type="text"
 								placeholder={title}
 								onChange={changeHandler}
+								value={movie}
 							/>
 						</Col>
 						<Col xs={12} md={2}>

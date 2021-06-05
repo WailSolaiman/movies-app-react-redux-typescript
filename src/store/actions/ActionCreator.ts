@@ -23,21 +23,8 @@ export const getMovieId = (
 ): ThunkAction<void, RootState, null, MovieAction | AlertAction> => {
 	return async (dispatch) => {
 		try {
-			const timeout: number = 3000;
-			const controller = new AbortController();
-			const id = setTimeout(() => {
-				controller.abort();
-				dispatch({
-					type: SET_ALERT,
-					payload: "Movie not found!",
-				});
-			}, timeout);
-
 			const response = await fetch(
-				`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${movieQuery}`,
-				{
-					signal: controller.signal,
-				}
+				`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${movieQuery}`
 			);
 
 			if (!response.ok) {
@@ -77,8 +64,6 @@ export const getMovieId = (
 					},
 				});
 			}
-
-			clearTimeout(id);
 		} catch (error) {
 			console.error("ERROR: " + error);
 		}

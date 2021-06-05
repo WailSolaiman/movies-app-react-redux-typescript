@@ -54,7 +54,7 @@ function App() {
 							visible: {
 								opacity: 1,
 								transition: {
-									delay: 0.8,
+									delay: 0.9,
 								},
 							},
 						}}

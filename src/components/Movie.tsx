@@ -64,7 +64,7 @@ const Movie: FC = (): ReactElement => {
 											</span>
 										</p>
 										<p>
-											Language: {data.spoken_languages[0].name} - Runtime:{" "}
+											Language: {data.spoken_languages[0]?.name} - Runtime:{" "}
 											{data.runtime} Min.
 										</p>
 										<h6>
